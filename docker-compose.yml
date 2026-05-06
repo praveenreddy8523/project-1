@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./client
+    container_name: mantraexim-frontend
+    restart: always
+    environment:
+      - NODE_ENV=production
+    networks:
+      - mantra-network
+
+  backend:
+    build:
+      context: ./server
+    container_name: mantraexim-backend
+    restart: always
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "5000:5000"
+    networks:
+      - mantra-network
+
+  nginx:
+    image: nginx:latest
+    container_name: mantraexim-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf   # Make sure this is a valid file
+      - ./client/dist:/usr/share/nginx/html  # React production build output
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - mantra-network
+
+networks:
+  mantra-network:
+    driver: bridge

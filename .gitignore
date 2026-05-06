@@ -1,0 +1,28 @@
+# Node.js
+node_modules/
+.env
+dist/
+build/
+npm-debug.log
+
+# macOS/Linux system files
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# Docker
+*.env
+
+# React/Vite frontend
+client/node_modules/
+client/dist/
+client/build/
+client/.env
+
+server/.env
+
+# VSCode and JetBrains settings
+.vscode/
+.idea/
